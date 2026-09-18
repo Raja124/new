@@ -1,0 +1,78 @@
+{
+  "manifest_version": 3,
+  "name": "Nusuk Flow",
+  "version": "4.1.4",
+  "description": "A focused Nusuk workspace for autofill, passport tools, batch processing, and reliable form automation.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://translate.googleapis.com/*",
+    "https://api.ocr.space/*",
+    "https://cdn.jsdelivr.net/*",
+    "https://*.workers.dev/*",
+    "https://api.github.com/*"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/vaccine.jpg",
+        "tessdata/worker.min.js",
+        "tessdata/tesseract-core.wasm",
+        "tessdata/eng.traineddata.gz"
+      ],
+      "matches": [
+        "https://*.nusuk.sa/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://masar.nusuk.sa/*"
+      ],
+      "js": [
+        "utils/logger.js",
+        "utils/license.js",
+        "utils/route-watcher.js",
+        "utils/angular-simulator.js",
+        "utils/dropdown-helper.js",
+        "utils/passport-parser.js",
+        "modules/tesseract.js",
+        "modules/mrz-reader.js",
+        "modules/auto-reload.js",
+        "modules/autofill.js",
+        "modules/translation.js",
+        "modules/issue-date-calc.js",
+        "modules/vaccine-upload.js",
+        "modules/embassy-selector.js",
+        "modules/disable-loading-overlay.js",
+        "modules/ocr.js",
+        "modules/batch-passport.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
